@@ -58,7 +58,7 @@ public class FacilityServiceImpl : IFacilityService
 
     public List<FacilityDTO> findAll()
     {
-        return db.Facilities.Where(f => f.IsHide == false).Select(f => new FacilityDTO {  FacilityId = f.FacilityId, FacilityName = f.FacilityName, IsHide = f.IsHide}).ToList(); 
+        return db.Facilities.Where(f => f.IsHide == false).Select(f => new FacilityDTO { FacilityId = f.FacilityId, FacilityName = f.FacilityName, IsHide = f.IsHide }).ToList();
     }
 
     public List<FacilityDTO> findAllDeleted()
@@ -73,21 +73,19 @@ public class FacilityServiceImpl : IFacilityService
 
     public bool Recover(int id)
     {
-        try
-        {
-            var facility = db.Facilities.SingleOrDefault(a => a.FacilityId == id && a.IsHide == true);
-            if (facility == null)
-            {
-                return false;
-            }
-            facility.IsHide = false;
-            return update(facility);
-        }
-        catch
+
+        var facility = db.Facilities.SingleOrDefault(a => a.FacilityId == id && a.IsHide == true);
+        if (facility == null)
         {
             return false;
         }
+        facility.IsHide = false;
+        return update(facility);
+
     }
 
-    
+    public Facility findById(int id)
+    {
+        return db.Facilities.SingleOrDefault(f => f.FacilityId == id && f.IsHide == false);
+    }
 }

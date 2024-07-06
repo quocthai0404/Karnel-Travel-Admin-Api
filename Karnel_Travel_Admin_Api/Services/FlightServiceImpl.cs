@@ -17,14 +17,17 @@ public class FlightServiceImpl : IFlightService
 
     public bool create(Flight flight)
     {
-        if (flight.DepartureAirportId == flight.ArrivalAirportId) {
+        if (flight.DepartureAirportId == flight.ArrivalAirportId)
+        {
             return false;
         }
-        if (flight.DepartureTime > flight.ArrivalTime) {
+        if (flight.DepartureTime > flight.ArrivalTime)
+        {
             return false;
         }
 
-        if (airportService.findById(flight.ArrivalAirportId) == null || airportService.findById(flight.DepartureAirportId) == null) {
+        if (airportService.findById(flight.ArrivalAirportId) == null || airportService.findById(flight.DepartureAirportId) == null)
+        {
             return false;
         }
         try
@@ -71,7 +74,7 @@ public class FlightServiceImpl : IFlightService
 
     public List<FlightDTO> findAllDeleted()
     {
-        
+
         return db.Flights.Where(f => f.IsHide == true).Select(f => new FlightDTO
         {
             FlightId = f.FlightId,
@@ -107,21 +110,16 @@ public class FlightServiceImpl : IFlightService
 
     public bool Recover(int id)
     {
-        try
-        {
-            var flight = db.Flights.SingleOrDefault(f => f.FlightId == id && f.IsHide == true);
-            if (flight == null)
-            {
-                return false;
-            }
-            flight.IsHide = false;
-            return update(flight);
-        }
-        catch
+
+        var flight = db.Flights.SingleOrDefault(f => f.FlightId == id && f.IsHide == true);
+        if (flight == null)
         {
             return false;
         }
+        flight.IsHide = false;
+        return update(flight);
+
     }
 
-    
+
 }

@@ -65,26 +65,22 @@ public class FlightController : ControllerBase
             return Ok(new { result = "update flight ok" });
         }
         return BadRequest(new { result = "update flight failed" });
-
     }
 
     [HttpGet("findAllDeleted")]
     public IActionResult UpdatefindAllDeletedFlight()
     {
         return Ok(flightService.findAllDeleted());
-
     }
 
     [HttpGet("findAll")]
     public IActionResult findAll()
     {
         return Ok(flightService.findAllDTO());
-
     }
     [HttpPost("Recover/{id}")]
     public IActionResult Recover(int id)
     {
         return Ok(flightService.Recover(id));
-
     }
 }

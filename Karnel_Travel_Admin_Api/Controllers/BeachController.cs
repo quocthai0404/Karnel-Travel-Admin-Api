@@ -27,7 +27,14 @@ public class BeachController : ControllerBase
     [HttpPut("UpdateBeach")]
     public IActionResult UpdateBeach([FromBody] BeachDTO beach)
     {
-        if (beachService.update(new Models.Beach { BeachId = beach.BeachId, BeachName = beach.BeachName, BeachLocation = beach.BeachLocation, LocationId = beach.LocationId }))
+        var beachUpdate = beachService.findById(beach.BeachId);
+        if (beachUpdate == null) {
+            return BadRequest(new { result = "Cannot find beach" });
+        }
+        beachUpdate.BeachName = beach.BeachName;
+        beachUpdate.BeachLocation = beach.BeachLocation;
+        beachUpdate.LocationId = beach.LocationId;
+        if (beachService.update(beachUpdate))
         {
             return Ok(new { result = "update beach ok" });
         }

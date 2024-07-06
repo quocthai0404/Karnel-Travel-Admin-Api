@@ -27,7 +27,7 @@ public class AirportServiceImpl : IAirportService
 
     public bool delete(string airportId)
     {
-        
+
         try
         {
             var airport = findById(airportId);
@@ -64,12 +64,12 @@ public class AirportServiceImpl : IAirportService
 
     public AirportDTO findByIdDTO(string airportId)
     {
-        return db.Airports.Select(a => new AirportDTO{ AirportId = a.AirportId, AirportName = a.AirportName, IsHide = a.IsHide }).SingleOrDefault(a => a.AirportId == airportId && a.IsHide == false);
+        return db.Airports.Select(a => new AirportDTO { AirportId = a.AirportId, AirportName = a.AirportName, IsHide = a.IsHide }).SingleOrDefault(a => a.AirportId == airportId && a.IsHide == false);
     }
 
     public List<AirportDTO> findAll()
     {
-        return db.Airports.Where(a => a.IsHide==false).Select(a => new AirportDTO { AirportId = a.AirportId, AirportName = a.AirportName, IsHide = a.IsHide }).ToList();
+        return db.Airports.Where(a => a.IsHide == false).Select(a => new AirportDTO { AirportId = a.AirportId, AirportName = a.AirportName, IsHide = a.IsHide }).ToList();
     }
 
     public List<AirportDTO> findAllDeleted()
@@ -79,19 +79,14 @@ public class AirportServiceImpl : IAirportService
 
     public bool Recover(string airportId)
     {
-        try
-        {
-            var airport = db.Airports.SingleOrDefault(a => a.AirportId ==airportId && a.IsHide == true);
-            if (airport == null)
-            {
-                return false;
-            }
-            airport.IsHide = false;
-            return update(airport);
-        }
-        catch
+
+        var airport = db.Airports.SingleOrDefault(a => a.AirportId == airportId && a.IsHide == true);
+        if (airport == null)
         {
             return false;
         }
+        airport.IsHide = false;
+        return update(airport);
+
     }
 }

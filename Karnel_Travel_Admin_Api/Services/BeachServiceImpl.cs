@@ -50,7 +50,12 @@ public class BeachServiceImpl : IBeachService
 
     public List<BeachDTO> findAllDTO()
     {
-        return db.Beaches.Where(b => b.IsHide == false).Select(b => new BeachDTO{ BeachId = b.BeachId, BeachName = b.BeachName, BeachLocation = b.BeachLocation, LocationId = b.LocationId }).ToList();   
+        return db.Beaches.Where(b => b.IsHide == false).Select(b => new BeachDTO { BeachId = b.BeachId, BeachName = b.BeachName, BeachLocation = b.BeachLocation, LocationId = b.LocationId }).ToList();
+    }
+
+    public Beach findById(int id)
+    {
+        return db.Beaches.SingleOrDefault(b => b.BeachId == id && b.IsHide == false);
     }
 
     public BeachDTO findByIdDTO(int id)
@@ -58,24 +63,19 @@ public class BeachServiceImpl : IBeachService
         return findAllDTO().Select(b => new BeachDTO { BeachId = b.BeachId, BeachName = b.BeachName, BeachLocation = b.BeachLocation, LocationId = b.LocationId }).SingleOrDefault(b => b.BeachId == id);
     }
 
-    
+
 
     public bool Recover(int id)
     {
-        try
-        {
-            var beach = db.Beaches.SingleOrDefault(a => a.BeachId == id && a.IsHide == true);
-            if (beach == null)
-            {
-                return false;
-            }
-            beach.IsHide = false;
-            return update(beach);
-        }
-        catch
+
+        var beach = db.Beaches.SingleOrDefault(a => a.BeachId == id && a.IsHide == true);
+        if (beach == null)
         {
             return false;
         }
+        beach.IsHide = false;
+        return update(beach);
+
     }
 
     public bool update(Beach beach)

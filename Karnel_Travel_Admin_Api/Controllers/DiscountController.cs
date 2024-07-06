@@ -24,7 +24,6 @@ public class DiscountController : ControllerBase
     {
         if (discountService.create(discount)) {
             return Ok(new { result = "Add Discount Ok" });
-            
         }
         return BadRequest(new { result = "Add Discount Failed" });
     }

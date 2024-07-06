@@ -18,5 +18,8 @@ public static class ServiceExtensions
         services.AddScoped<IDiscountService, DiscountServiceImpl>();
         services.AddScoped<IFacilityService, FacilityServiceImpl>();
         services.AddScoped<IFlightService, FlightServiceImpl>();
+        services.AddScoped<IHotelService, HotelServiceImpl>();
+        services.AddScoped<ILocationService, LocationServiceImpl>();
+        services.AddScoped<IRestaurantService, RestaurantServiceImpl>();
     }
 }

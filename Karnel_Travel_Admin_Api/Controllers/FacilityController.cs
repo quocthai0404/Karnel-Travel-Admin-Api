@@ -32,7 +32,12 @@ public class FacilityController : ControllerBase
     [HttpPut("UpdateFacility")]
     public IActionResult UpdateFacility([FromBody] FacilityDTO facilityDTO)
     {
-        if (facilityService.update(new Models.Facility {FacilityId = facilityDTO.FacilityId ,FacilityName = facilityDTO.FacilityName }))
+        var facility = facilityService.findById(facilityDTO.FacilityId);
+        if (facility==null) { 
+            return BadRequest(new { result = "Cannot Find Facility" });
+        }
+        facility.FacilityName = facilityDTO.FacilityName;
+        if (facilityService.update(facility))
         {
             return Ok(new { result = "Update Facility ok" });
         }

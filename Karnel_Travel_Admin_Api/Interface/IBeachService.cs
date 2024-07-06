@@ -10,7 +10,7 @@ public interface IBeachService
     public bool delete(int id);
     public List<BeachDTO> findAllDTO();
     public BeachDTO findByIdDTO(int id);
-
+    public Beach findById(int id);
     public List<BeachDTO> findAllDeleted();
     public bool Recover(int id);
 }

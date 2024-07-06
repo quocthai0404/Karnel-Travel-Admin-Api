@@ -26,7 +26,12 @@ public class AirportController : ControllerBase
     [HttpPut("updateAirport")]
     public IActionResult updateAirport([FromBody] AirportDTO ap)
     {
-        if (airportService.update(new Models.Airport { AirportId = ap.AirportId, AirportName = ap.AirportName, IsHide = ap.IsHide }))
+        var airport = airportService.findById(ap.AirportId);
+        if (airport == null) {
+            return BadRequest(new { result = "cannot find airpod" });
+        }
+        airport.AirportName = ap.AirportName;
+        if (airportService.update(airport))
         {
             return Ok(new { result = "update airport ok" });
         }

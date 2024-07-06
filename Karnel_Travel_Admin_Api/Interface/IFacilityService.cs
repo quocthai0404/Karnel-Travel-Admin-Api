@@ -9,6 +9,7 @@ public interface IFacilityService
     public bool update(Facility facility);
     public bool delete(int id);
     public FacilityDTO findByIdDTO(int id);
+    public Facility findById(int id);
     public List<FacilityDTO> findAll();
     public List<FacilityDTO> findAllDeleted();
     public bool Recover(int id);

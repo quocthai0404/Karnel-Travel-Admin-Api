@@ -117,13 +117,13 @@ public class HotelServiceImpl : IHotelService
     {
         return db.Hotels.SingleOrDefault(a => a.HotelId == id && a.IsHide == false);
     }
-	public List<ReviewDto> findAllReview(int hotelId)
+	public List<ReviewDTO> findAllReview(int hotelId)
 	{
 		return (from review in db.Reviews
 				join user in db.Users on review.UserId equals user.UserId
 				where review.HotelId == hotelId && review.IsHide == false
-				select new ReviewDto
-				{
+				select new ReviewDTO
+                {
 					ReviewId = review.ReviewId,
 					ReviewStar = review.ReviewStar,
 					ReviewText = review.ReviewText,

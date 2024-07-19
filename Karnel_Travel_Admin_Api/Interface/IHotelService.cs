@@ -13,7 +13,7 @@ public interface IHotelService
     public HotelDTO findByIdDTO(int id);
     public List<HotelDTO> findAllDeleted();
     public bool Recover(int id);
-    public List<ReviewDto> findAllReview(int hotelId);
+    public List<ReviewDTO> findAllReview(int hotelId);
     public PhotoDTO findMainPhoto(int hotelId);
     public int getSumOfReviewStars(int hotelId);
     public List<HotelAndMainPhotoDto> listHotel();

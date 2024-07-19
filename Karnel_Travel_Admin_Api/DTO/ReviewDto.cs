@@ -1,20 +1,23 @@
-﻿namespace Karnel_Travel_Admin_Api.DTO;
+﻿
 
-public class ReviewDto
+
+namespace Karnel_Travel_Admin_Api.DTO;
+
+public class ReviewDTO
 {
-	public int ReviewId { get; set; }
+    public int ReviewId { get; set; }
 
-	public int ReviewStar { get; set; }
+    public int ReviewStar { get; set; }
 
-	public string ReviewText { get; set; } = null!;
+    public string ReviewText { get; set; } = null!;
 
-	public int UserId { get; set; }
+    public int UserId { get; set; }
 
-	public string UserFullName { get; set; }
+    public string UserFullName { get; set; }
 
-	public int? HotelId { get; set; }
+    public int? HotelId { get; set; }
 
-	public int? RestaurantId { get; set; }
+    public int? RestaurantId { get; set; }
 
-	public bool IsHide { get; set; }
+    public bool IsHide { get; set; }
 }

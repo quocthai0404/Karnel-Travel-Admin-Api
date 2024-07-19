@@ -57,7 +57,7 @@ public class PhotoController : ControllerBase
                     RoomId = stringRoomId == "-1" ? null : int.Parse(stringRoomId),
                     RestaurantId = stringRestaurantId == "-1" ? null : int.Parse(stringRestaurantId),
                     BeachId = stringBeachId == "-1" ? null : int.Parse(stringBeachId),
-                    SiteId = stringSiteId == "-1" ? null : int.Parse(stringSiteId),
+                    SiteId = null,
                     PhotoUrl = item
             });
             }

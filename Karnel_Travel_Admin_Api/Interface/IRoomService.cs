@@ -9,8 +9,8 @@ public interface IRoomService
     public bool update(Room room);
     public bool delete(int roomId);
     public Room findById(int roomId);
-    public RoomDTO findByIdDTO(string airportId);
-    public List<AirportDTO> findAll();
-    public List<AirportDTO> findAllDeleted();
-    public bool Recover(string airportId);
+    public RoomDTO findByIdDTO(int roomId);
+    public List<RoomDTO> findAll();
+    public List<RoomDTO> findAllDeleted();
+    public bool Recover(int roomId);
 }

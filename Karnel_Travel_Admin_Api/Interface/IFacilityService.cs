@@ -13,4 +13,6 @@ public interface IFacilityService
     public List<FacilityDTO> findAll();
     public List<FacilityDTO> findAllDeleted();
     public bool Recover(int id);
+    public List<FacilityDTO> findAll(int hotelId);
+
 }

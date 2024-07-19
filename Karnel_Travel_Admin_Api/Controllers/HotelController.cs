@@ -68,7 +68,7 @@ public class HotelController : ControllerBase
     public IActionResult findAll()
     {
 
-        return Ok(hotelService.findAllDTO());
+        return Ok(hotelService.listHotel());
     }
 
     [HttpGet("findById/{id}")]

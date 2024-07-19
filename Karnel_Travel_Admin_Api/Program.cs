@@ -11,7 +11,9 @@ DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
 
 
 //thai
-var connectionString = "Server=DESKTOP-6L06R65;Database=Karnel_Travel;user id=sa;password=123456;trusted_connection=true;encrypt=false";
+//var connectionString = "Server=DESKTOP-6L06R65;Database=Karnel_Travel;user id=sa;password=123456;trusted_connection=true;encrypt=false";
+
+var connectionString = "Server=CPS;Database=Karnel_Travel;user id=sa;password=phamtien2004;trusted_connection=true;encrypt=false";
 //product
 //var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
@@ -51,6 +53,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(builder => builder
+				.AllowAnyHeader()
+				.AllowAnyMethod()
+				.SetIsOriginAllowed((host) => true)
+				.AllowCredentials()
+			);
 
 app.UseAuthorization();
 

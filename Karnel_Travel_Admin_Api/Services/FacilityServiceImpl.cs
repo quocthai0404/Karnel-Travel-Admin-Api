@@ -88,4 +88,14 @@ public class FacilityServiceImpl : IFacilityService
     {
         return db.Facilities.SingleOrDefault(f => f.FacilityId == id && f.IsHide == false);
     }
+	public List<FacilityDTO> findAll(int hotelId)
+	{
+		var hotel = db.Hotels.SingleOrDefault(h => h.HotelId == hotelId && h.IsHide == false);
+		return hotel.Facilities.Select(f => new FacilityDTO
+		{
+			FacilityId = f.FacilityId,
+			FacilityName = f.FacilityName
+		}).ToList();
+
+	}
 }

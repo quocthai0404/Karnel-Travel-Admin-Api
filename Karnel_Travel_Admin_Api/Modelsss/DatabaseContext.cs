@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Karnel_Travel_Admin_Api.Models;
+namespace Karnel_Travel_Admin_Api.Modelsss;
 
 public partial class DatabaseContext : DbContext
 {

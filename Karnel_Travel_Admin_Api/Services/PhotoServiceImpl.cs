@@ -2,15 +2,19 @@
 using CloudinaryDotNet.Actions;
 using Karnel_Travel_Admin_Api.Interface;
 using Karnel_Travel_Admin_Api.Models;
+using System.Net;
+using System.Reflection.Metadata;
 
 namespace Karnel_Travel_Admin_Api.Services;
 
 public class PhotoServiceImpl : IPhotoService
 {
+    private DatabaseContext db;
     private Cloudinary cloudinary = new Cloudinary(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
     public PhotoServiceImpl(DatabaseContext _db)
     {
         cloudinary.Api.Secure = true;
+        db = _db;
     }
 
     public List<string> AddListPhoto(List<IFormFile> files)
@@ -28,7 +32,14 @@ public class PhotoServiceImpl : IPhotoService
                 };
                 uploadResult = cloudinary.Upload(uploadParams);
             }
-            urls.Add(uploadResult.Url+"");
+            if (uploadResult.StatusCode == HttpStatusCode.OK)
+            {
+                urls.Add(uploadResult.Url + "");
+            }
+            else {
+                urls.Add("");
+            }
+            
         }
         return urls;
         
@@ -47,6 +58,26 @@ public class PhotoServiceImpl : IPhotoService
             uploadResult = cloudinary.Upload(uploadParams);
         }
         return uploadResult;
+    }
+
+    public bool addPhotoRecords(List<Photo> photos)
+    {
+        using var transaction = db.Database.BeginTransaction();
+
+        try
+        {
+            foreach (var photo in photos) {
+                db.Photos.Add(photo);
+                db.SaveChanges();
+            }
+            
+            transaction.Commit();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     public DeletionResult DeletePhoto(string publicId)

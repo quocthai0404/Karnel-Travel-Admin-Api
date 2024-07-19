@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Karnel_Travel_Admin_Api.DTO;
 
-namespace Karnel_Travel_Admin_Api.Models;
-
-public partial class Review
+public class ReviewDTO
 {
     public int ReviewId { get; set; }
 
@@ -18,10 +15,4 @@ public partial class Review
     public int? RestaurantId { get; set; }
 
     public bool IsHide { get; set; }
-
-    public virtual Hotel? Hotel { get; set; }
-
-    public virtual Restaurant? Restaurant { get; set; }
-
-    public virtual User User { get; set; } = null!;
 }

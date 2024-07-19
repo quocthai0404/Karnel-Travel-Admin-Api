@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Karnel_Travel_Admin_Api.Models;
+namespace Karnel_Travel_Admin_Api.Modelsss;
 
 public partial class Tour
 {

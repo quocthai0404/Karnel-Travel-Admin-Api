@@ -1,5 +1,6 @@
 ﻿using Karnel_Travel_Admin_Api.DTO;
 using Karnel_Travel_Admin_Api.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ public class AirportController : ControllerBase
     {
         airportService = _airportService;
     }
+ 
     [HttpPost("addAirport")]
     public IActionResult addAirport([FromBody] AirportDTO ap)
     {
